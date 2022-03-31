@@ -55,7 +55,7 @@ router.post('/cryptos', requireToken, (req, res, next) => {
 })
 
 // UPDATE Route - PATCH /cryptos/id
-router.patch('/pets/:id', requireToken, removeBlanks, (req, res, next) => {
+router.patch('/cryptos/:id', requireToken, removeBlanks, (req, res, next) => {
 	delete req.body.owner
 	Crypto.findById(req.params.id)
 		.then(handle404)
