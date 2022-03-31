@@ -1,13 +1,20 @@
 const mongoose = require('mongoose')
 
-const exampleSchema = new mongoose.Schema(
+const cryptoSchema = new mongoose.Schema(
 	{
-		title: {
+		name: {
 			type: String,
 			required: true,
 		},
-		text: {
+		dateCreated: {
 			type: String,
+			required: true,
+		},
+		totalSupply: {
+			type: Number,
+		},
+		currentPrice:{
+			type: Number,
 			required: true,
 		},
 		owner: {
@@ -21,4 +28,4 @@ const exampleSchema = new mongoose.Schema(
 	}
 )
 
-module.exports = mongoose.model('Example', exampleSchema)
+module.exports = mongoose.model('Crypto', cryptoSchema)

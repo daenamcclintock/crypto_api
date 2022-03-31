@@ -1,37 +1,35 @@
+// Dependencies
+
 // require necessary NPM packages
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 
 // require route files
-const exampleRoutes = require('./app/routes/example_routes')
+const cryptoRoutes = require('./app/routes/crypto_routes')
 const userRoutes = require('./app/routes/user_routes')
 
-// require middleware
+// Require Middleware
 const errorHandler = require('./lib/error_handler')
 const replaceToken = require('./lib/replace_token')
 const requestLogger = require('./lib/request_logger')
 
-// require database configuration logic
-// `db` will be the actual Mongo URI as a string
+// Require database configuration logic (`db` will be the actual Mongo URI as a string)
 const db = require('./config/db')
 
-// require configured passport authentication middleware
+// Require configured passport authentication middleware
 const auth = require('./lib/auth')
 
-// define server and client ports
-// used for cors and local port declaration
+// Define server and client ports (used for cors and local port declaration)
 const serverDevPort = 8000
 const clientDevPort = 3000
 
-// establish database connection
-// use new version of URL parser
-// use createIndex instead of deprecated ensureIndex
+// Establish database connection (use new version of URL parser)
 mongoose.connect(db, {
 	useNewUrlParser: true,
 })
 
-// instantiate express application object
+// Instantiate express application object
 const app = express()
 
 // set CORS headers on response from this API using the `cors` NPM package
@@ -42,7 +40,7 @@ app.use(
 	})
 )
 
-// define port for API to run on
+// Define port for API to run on
 // adding PORT= to your env file will be necessary for deployment
 const port = process.env.PORT || serverDevPort
 
@@ -65,7 +63,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(requestLogger)
 
 // register route files
-app.use(exampleRoutes)
+app.use(cryptoRoutes)
 app.use(userRoutes)
 
 // register error handling middleware
